@@ -1,0 +1,50 @@
+/* src/components/DoctorCard.css */
+
+.doctor__card_container {
+  /* display: flex; */
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.doctor__card {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  /* margin: 15px; */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 300px;
+}
+
+.doctor__card--name {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+.doctor__card--specialty {
+  font-size: 12px;
+  color: #c71586;
+  margin: 10px 0;
+}
+
+.doctor__card--experience {
+  font-size: 14px;
+  color: #666;
+}
+
+@media (max-width: 768px) {
+  .doctor__card {
+    min-width: 320px;
+    /* min-width: 400px; */
+    width: 100%;
+  }
+  .doctor__card_container {
+    grid-template-columns: 1fr;
+  }
+}
+
+p {
+  margin-bottom: 5px;
+}

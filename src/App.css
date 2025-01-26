@@ -1,0 +1,48 @@
+/* App.css */
+
+.service-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.app_content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: rgb(232, 229, 229);
+  width: 100%;
+  padding: 20px;
+  margin-top: 40px;
+}
+
+form {
+  margin-top: 20px;
+}
+
+form label {
+  display: block;
+  margin: 5px 0;
+}
+
+form input,
+form select, select {
+  padding: 8px;
+  margin-bottom: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+form button {
+  padding: 10px 20px;
+  background-color: #7adba7;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  margin: 0 auto;
+  display: block;
+}
+
+.service__list {
+  margin-top: 20px;
+}
