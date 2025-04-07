@@ -156,3 +156,4 @@ const AppointmentForm = ({ doctors, appointmentDetails, handleAppointmentChange,
 
 - **`useState`**: Se utiliza para manejar los datos del formulario, como el nombre del paciente, el doctor seleccionado y la fecha de la cita.
 - **`useEffect`**: Se utiliza para cargar la lista de doctores y servicios cuando el componente principal (`App`) se monta.
+# m05--e5--mejoras-apis-typescript-seguridad
