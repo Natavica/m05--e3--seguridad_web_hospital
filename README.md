@@ -1,159 +1,49 @@
-# Ejercicio Práctico: Manejo Avanzado del DOM y Elementos ReactJS para el Proyecto del Hospital
+# 🏥 Hospital Web App  
+**Aplicación de Gestión Hospitalaria con React, TypeScript y Seguridad Front-End**
 
-En este ejercicio práctico, los estudiantes profundizarán en el manejo del DOM virtual, el uso de referencias para manipular elementos del DOM, y la integración de componentes avanzados en ReactJS. Implementarán funcionalidades avanzadas en el sistema del hospital, como la gestión del DOM en el cliente y servidor, la optimización de rendimiento, y el uso de fragmentos y componentes de orden superior para mejorar la modularidad y eficiencia del sistema.
-
-___
-
-El DOM Virtual es una representación ligera del DOM real en memoria. React utiliza esta representación para calcular eficientemente los cambios necesarios en la interfaz de usuario. Aquí está cómo ayuda:
-
-**Comparación eficiente:** React compara la versión anterior del DOM Virtual con la nueva (proceso llamado reconciliation). Solo actualiza los elementos que han cambiado, en lugar de renderizar todo el DOM real.
-
-**Menos operaciones costosas:** Modificar el DOM real es una operación costosa. Al minimizar estas actualizaciones, React mejora significativamente el rendimiento, especialmente cuando hay muchas interacciones o actualizaciones frecuentes.
-
-**Reutilización de componentes:** React reutiliza componentes ya renderizados siempre que sea posible, lo que ahorra recursos.
-
-## Características
-
-1. **Componentes Reutilizables**:
-   - `DoctorCard`: Muestra la información de un doctor (nombre, especialidad, años de experiencia).
-   - `ServiceList`: Lista los servicios médicos disponibles en el hospital.
-   - `AppointmentForm`: Formulario para agendar citas con un doctor.
-
-2. **Hooks en React**:
-   - **`useState`**: Se usa para manejar los estados de los formularios y los datos (nombre del paciente, doctor seleccionado, fecha de la cita, servicio seleccionado).
-   - **`useEffect`**: Se utiliza para cargar los doctores y servicios cuando el componente principal (`App`) se monta en el DOM.
-
-3. **Flujo del Proyecto**:
-   - Los datos de los doctores y servicios se cargan y se pasan como `props` entre componentes.
-   - Los formularios permiten a los usuarios ingresar sus datos y agendar citas, que se muestran en la consola y en una alerta.
+Esta aplicación web ha sido desarrollada para gestionar de manera eficiente la información de un hospital, incluyendo pacientes, doctores y citas médicas. Está construida con **React** y **TypeScript**, y se enfoca en buenas prácticas de desarrollo como el consumo de APIs, la integración de seguridad en el front-end y la optimización del rendimiento con Hooks.
 
 ---
 
-## Tecnologías Utilizadas
+## 🔗 Consumo de APIs con Fetch API o Axios
 
-- **React**: Biblioteca de JavaScript para la construcción de interfaces de usuario.
-- **Hooks**: `useState` y `useEffect` para gestionar el estado y el ciclo de vida de los componentes.
-- **JSX**: Sintaxis para definir la estructura visual de los componentes.
-- **CSS**: Estilos básicos para la aplicación.
+La aplicación se comunica con una base de datos mediante **solicitudes HTTP (GET, POST, PUT y DELETE)** utilizando Fetch API o Axios. Esta integración permite gestionar todos los recursos del hospital, como pacientes, citas y personal médico. 
 
----
-
-## Estructura del Proyecto
-
-```plaintext
-/src
-  └── /components
-      ├── DoctorCard.jsx        # Componente para mostrar la información del doctor.
-      ├── ServiceList.jsx       # Componente para mostrar la lista de servicios.
-      └── AppointmentForm.jsx   # Componente para el formulario de citas.
-  ├── App.jsx                   # Componente principal que maneja el estado y los efectos.
-  └── App.css                   # Estilos básicos para la aplicación.
-```
-
+Los datos recuperados se renderizan dinámicamente en la interfaz de usuario, permitiendo una experiencia fluida e interactiva. Además, se implementó un sistema robusto de manejo de errores para asegurar que, en caso de fallas en la red o errores del servidor, los usuarios reciban mensajes claros y amigables que expliquen lo ocurrido.
 
 ---
 
-## Pasos para Ejecutar el Proyecto
+## 📦 Uso de TypeScript en Componentes Clave
 
-1. **Clonar el repositorio**:
-   ```bash
-      git clone https://github.com/natavica/m04--e2--componentes_basicos_react.git
-      cd m04--e2--componentes_basicos_react
+El proyecto ha sido refactorizado para integrar **TypeScript**, lo que permite una mayor seguridad y control durante el desarrollo. Los componentes principales fueron actualizados para incluir definiciones estrictas de tipos, tanto para props como para estados.
 
-2. **Instalar dependencias**:
-    ```bash
-      npm install
-
-3. **Iniciar el servidor de desarrollo**:
-    ```bash
-      npm run dev
-
-4. **Abrir la aplicación**: Abre tu navegador y accede a http://localhost:5175 para ver la aplicación en acción.
-
+También se definieron **interfaces y clases** para modelar correctamente los datos del sistema, como la información de usuarios, doctores y pacientes. Gracias al tipado fuerte de TypeScript, se reducen significativamente los errores en tiempo de ejecución y se mejora la legibilidad y mantenibilidad del código.
 
 ---
 
-## Detalles de Implementación
+## 🛡️ Seguridad en el Front-End
 
-1. **DoctorCard Component**
-Este componente recibe como props los datos de un doctor (nombre, especialidad, años de experiencia) y los muestra.
-```jsx
-const DoctorCard = ({ name, specialty, yearsOfExperience }) => (
-  <div className="doctor-card">
-    <h3>{name}</h3>
-    <p>Especialidad: {specialty}</p>
-    <p>Años de experiencia: {yearsOfExperience}</p>
-  </div>
-);
-```
+Se implementaron varias medidas para asegurar la aplicación desde el lado del cliente. A través del uso de **React Router DOM**, se protegieron rutas que solo pueden ser accedidas por usuarios autenticados.
 
-2. **ServiceList Component**
-Este componente muestra una lista de servicios médicos disponibles y permite al usuario seleccionar uno.
-```jsx
-const ServiceList = ({ services, handleServiceChange }) => (
-  <div className="service-list">
-    <h2>Servicios Médicos Disponibles</h2>
-    <select onChange={handleServiceChange}>
-      <option value="">Seleccionar servicio...</option>
-      {services.map((service, index) => (
-        <option key={index} value={service}>{service}</option>
-      ))}
-    </select>
-  </div>
-);
-```
+Además, las peticiones a la API están protegidas mediante **JWT (JSON Web Tokens)**, asegurando que solo los usuarios con los permisos adecuados puedan acceder a la información sensible. También se integraron validaciones de formularios para prevenir ataques como **XSS**, y se añadió encriptación para proteger los datos confidenciales antes de enviarlos al servidor.
 
-3. **AppointmentForm Component**
-Este componente muestra un formulario donde el usuario puede ingresar su nombre, seleccionar un doctor y una fecha para la cita. Los datos son gestionados mediante el estado useState y se manejan con `handleAppointmentChange`.
+---
 
-```jsx
-const AppointmentForm = ({ doctors, appointmentDetails, handleAppointmentChange, handleSubmit }) => (
-  <form onSubmit={handleSubmit}>
-    <h2>Agendar Cita</h2>
+## ⚙️ Optimización con Hooks y Manejo de Errores
 
-    <label htmlFor="patientName">Nombre del paciente:</label>
-    <input
-      type="text"
-      id="patientName"
-      name="patientName"
-      value={appointmentDetails.patientName}
-      onChange={handleAppointmentChange}
-      required
-    />
+El manejo del estado y los efectos secundarios se realiza con **Hooks** como `useState` y `useEffect`. Para evitar duplicación de lógica, se desarrollaron **Hooks personalizados** que encapsulan funcionalidades comunes, como el control de autenticación o la gestión de formularios.
 
-    <label htmlFor="doctor">Selecciona un doctor:</label>
-    <select
-      id="doctor"
-      name="selectedDoctor"
-      value={appointmentDetails.selectedDoctor}
-      onChange={handleAppointmentChange}
-      required
-    >
-      <option value="">Seleccionar...</option>
-      {doctors.map((doctor) => (
-        <option key={doctor.id} value={doctor.name}>
-          {doctor.name} - {doctor.specialty}
-        </option>
-      ))}
-    </select>
+La gestión de errores también fue optimizada: cualquier fallo durante las peticiones o la interacción del usuario se detecta y se comunica de manera clara. Además, se aplicaron técnicas para **mejorar el rendimiento**, como el uso correcto de dependencias en `useEffect` y la prevención de renderizados innecesarios.
 
-    <label htmlFor="appointmentDate">Fecha de la cita:</label>
-    <input
-      type="date"
-      id="appointmentDate"
-      name="appointmentDate"
-      value={appointmentDetails.appointmentDate}
-      onChange={handleAppointmentChange}
-      required
-    />
+---
 
-    <button type="submit">Agendar cita</button>
-  </form>
-);
-```
+## 🧰 Tecnologías Utilizadas
 
-4. **Uso de `useState` y `useEffect`**
+- **React**
+- **TypeScript**
+- **Axios / Fetch API**
+- **React Router DOM**
+- **JWT**
+- **Tailwind** (o estilos personalizados)
 
-- **`useState`**: Se utiliza para manejar los datos del formulario, como el nombre del paciente, el doctor seleccionado y la fecha de la cita.
-- **`useEffect`**: Se utiliza para cargar la lista de doctores y servicios cuando el componente principal (`App`) se monta.
-# m05--e5--mejoras-apis-typescript-seguridad
+---
